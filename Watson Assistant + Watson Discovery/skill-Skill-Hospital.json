@@ -1,0 +1,706 @@
+{
+  "intents": [
+    {
+      "intent": "adios",
+      "examples": [
+        {
+          "text": "Adios"
+        },
+        {
+          "text": "Buenisimo, quedamos así"
+        },
+        {
+          "text": "bueno chau"
+        },
+        {
+          "text": "bueno, eso fue todo, adios"
+        },
+        {
+          "text": "Chaucito"
+        },
+        {
+          "text": "Chau, gracias"
+        },
+        {
+          "text": "dale, chau"
+        },
+        {
+          "text": "Me voy, gracias"
+        },
+        {
+          "text": "muchas gracias por tu respuesta, adios"
+        }
+      ],
+      "description": "El usuario desea despedirse"
+    },
+    {
+      "intent": "consulta_horarios",
+      "examples": [
+        {
+          "text": "a que hora atienden los medicos?"
+        },
+        {
+          "text": "a que horas atienden los médicos?"
+        },
+        {
+          "text": "donde están los horarios de atencion?"
+        },
+        {
+          "text": "Donde puedo consultar los horarios?"
+        },
+        {
+          "text": "Donde puedo ver una lista de horarios de consultas?"
+        },
+        {
+          "text": "Horarios de consultas médicas"
+        },
+        {
+          "text": "Horarios disponibles"
+        },
+        {
+          "text": "Listame los horarios por especialidad"
+        },
+        {
+          "text": "Necesito saber a que hora atiende mi médico"
+        },
+        {
+          "text": "No encuentro los horarios de atención"
+        }
+      ],
+      "description": "El usuario desea consultar el horario de atención (según especialidad)"
+    },
+    {
+      "intent": "consultar_turnos",
+      "examples": [
+        {
+          "text": "cuando es mi próxima consulta?"
+        },
+        {
+          "text": "Cuando tengo turno?"
+        },
+        {
+          "text": "Necesito consultar las fechas de mis consultas"
+        },
+        {
+          "text": "¿podría ver mi agenda?"
+        },
+        {
+          "text": "Quiero consultar mi agenda"
+        },
+        {
+          "text": "quiero consultar mis turnos"
+        }
+      ],
+      "description": "El usuario desea conocer su agenda de proximas consultas"
+    },
+    {
+      "intent": "disp_habitacion_privada",
+      "examples": [
+        {
+          "text": "cual es la disponibilidad de habitaciones privadas'"
+        },
+        {
+          "text": "cuando hay disponibilidad de habitacion privada?"
+        },
+        {
+          "text": "en que fechas tienen disponible las habitaciones privadas?"
+        },
+        {
+          "text": "fechas disponibles para habitacion privada"
+        },
+        {
+          "text": "lista de fechas libres para reservar habitacion privada"
+        },
+        {
+          "text": "que dias estan disponibles los cuartos privados?"
+        }
+      ],
+      "description": "El usuario desea conocer las fechas disponibles para reservar una habitacion privada"
+    },
+    {
+      "intent": "precio_habitacion_privada",
+      "examples": [
+        {
+          "text": "Cuál es el precio de las habitaciones privadas?"
+        },
+        {
+          "text": "¿Cuál es el precio por noche de la habitación privada?"
+        },
+        {
+          "text": "¿Cuanto cuesta pasar la noche de internación en una habitacion privada?"
+        },
+        {
+          "text": "Cuanto salen los cuartos para un solo paciente?"
+        },
+        {
+          "text": "¿cuanto sale una habitacion privada?"
+        },
+        {
+          "text": "¿Cuánto tengo que pagar para estar solo en mi habitación?"
+        },
+        {
+          "text": "precio de cuartos privados"
+        }
+      ],
+      "description": "El usuario desea saber cuanto cuesta la habitación privada"
+    },
+    {
+      "intent": "ubicacion_centros",
+      "examples": [
+        {
+          "text": "¿cual es la direccion del centro de atencion?"
+        },
+        {
+          "text": "Cual es la ubicacion?"
+        },
+        {
+          "text": "¿Cuales son las ubicaciones de los centros de salud?"
+        },
+        {
+          "text": "Dirección del hospital"
+        },
+        {
+          "text": "¿Donde estan ubicados?"
+        },
+        {
+          "text": "Donde esta situado el hospital?"
+        },
+        {
+          "text": "Donde quedan sus hospitales?"
+        },
+        {
+          "text": "donde se encuentran?"
+        },
+        {
+          "text": "Me pasas la dirección?"
+        },
+        {
+          "text": "Necesito saber la dirección del hospital"
+        },
+        {
+          "text": "ubicacion del hospital"
+        }
+      ],
+      "description": "El usuario desea conocer la ubicación de los centros de atención"
+    }
+  ],
+  "entities": [
+    {
+      "entity": "cedula",
+      "values": [
+        {
+          "type": "patterns",
+          "value": "CI Uruguaya",
+          "patterns": [
+            "\\d{8}",
+            "\\d{7}\\-\\d{1}"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "especialidad",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "dermatólogo",
+          "synonyms": [
+            "dermatóloga",
+            "dermatología"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "oftalmólogo",
+          "synonyms": [
+            "oculista",
+            "oftalmologa",
+            "oftalmología"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "pediatra",
+          "synonyms": [
+            "pediatría"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-date",
+      "values": [],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Bienvenido",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hola. Soy el servicio de respuesta automática del Hospital Británico. ¿Cómo puedo ayudarle?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Bienvenido",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "En otras cosas",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "No le he entendido. Intente reformular la consulta."
+              },
+              {
+                "text": "¿Puede expresarse con otras palabras? No le he entendido."
+              },
+              {
+                "text": "No entendí el significado."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "En otras cosas",
+      "previous_sibling": "node_8_1598980559477",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "¿Me podrías dar tu cédula?"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_2_1598549495635",
+      "event_name": "focus",
+      "dialog_node": "handler_1_1598549495659",
+      "previous_sibling": "handler_3_1598549495659"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_3_1598636424300",
+      "event_name": "focus",
+      "dialog_node": "handler_1_1598636424420",
+      "previous_sibling": "handler_5_1598636424420"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_2_1598549495635",
+      "context": {
+        "cedula": "@cedula.literal"
+      },
+      "conditions": "@cedula.literal",
+      "event_name": "input",
+      "dialog_node": "handler_3_1598549495659"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_3_1598636424300",
+      "context": {
+        "especialidad": "@especialidad"
+      },
+      "conditions": "@especialidad",
+      "event_name": "input",
+      "dialog_node": "handler_5_1598636424420"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_5_1598967820771",
+      "context": {
+        "fecha": "@sys-date"
+      },
+      "conditions": "@sys-date",
+      "event_name": "input",
+      "dialog_node": "handler_5_1598967820854"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "Por favor, ingrese una fecha para consultar su disponibilidad"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "slot_5_1598967820771",
+      "event_name": "focus",
+      "dialog_node": "handler_7_1598967820854",
+      "previous_sibling": "handler_5_1598967820854"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": {
+          "values": [
+            "Horarios de atención para Oftalmología:  - Dr. Méndez - Martes, Miércoles y Jueves - 8 a 16 hrs - Dra. Alberti - Lunes - 16 a 19 hrs - Dr. Villaseca - Viernes y Sábados - 8 a 12 hrs Horarios de atención para Dermatología:  - Dr. Panizza - Lunes a Jueves - 8 a 14 hrs - Dra. Casanova - Viernes - 10 a 16 hrs - Dr. Paz - Sábados - 8 a 12 hrs Horarios de atención para Pediatría: - Dr. Fernández - Lunes, Miércoles y Viernes - 12 a 18 - Dra. Martínez - Martes - 8 a 15 - Dra. Esmoris - Jueves y Viernes - 17 a 20"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_3_1598635169899",
+      "conditions": "#consulta_horarios",
+      "event_name": "generic",
+      "dialog_node": "handler_7_1598981003046"
+    },
+    {
+      "type": "frame",
+      "title": "Preguntas sobre turnos agendados",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para la CI $cedula, los turnos agendados son:\n- Dr. Fernandez PEDIATRÍA - Lunes 7 de Setiembre 2020, 14:00, Hospital Prado\n- Dra. Villar OFTALMOLOGÍA - Miércoles 16 de Setiembre 2020, 18:15, Clínica Pocitos"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#consultar_turnos",
+      "dialog_node": "node_1_1598549446751",
+      "previous_sibling": "node_3_1598635169899"
+    },
+    {
+      "type": "frame",
+      "title": "Preguntas sobre horarios atención ",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#consulta_horarios",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_3_1598635169899",
+      "previous_sibling": "Bienvenido"
+    },
+    {
+      "type": "frame",
+      "title": "Disponibilidad habitación privada",
+      "output": {
+        "generic": []
+      },
+      "parent": "node_9_1598979326784",
+      "next_step": {
+        "behavior": "skip_user_input"
+      },
+      "conditions": "#disp_habitacion_privada",
+      "dialog_node": "node_4_1598967795273",
+      "previous_sibling": "node_8_1598965032898"
+    },
+    {
+      "type": "standard",
+      "title": "Disponibilidad por fecha",
+      "parent": "node_4_1598967795273",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "@sys-date.after('2020-09-01')",
+      "dialog_node": "node_5_1598968289701"
+    },
+    {
+      "type": "standard",
+      "title": "Fecha no válida (pasado)",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Por favor ingrese una fecha válida. "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_4_1598967795273",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "user_input",
+        "dialog_node": "node_5_1598968289701"
+      },
+      "conditions": "@sys-date.before('2020-09-01')",
+      "dialog_node": "node_6_1598975468222",
+      "previous_sibling": "node_5_1598968289701"
+    },
+    {
+      "type": "standard",
+      "title": "Más especialidades",
+      "output": {
+        "generic": []
+      },
+      "parent": "node_3_1598635169899",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_3_1598635169899"
+      },
+      "conditions": "@especialidad",
+      "dialog_node": "node_6_1598981444597",
+      "previous_sibling": "handler_7_1598981003046"
+    },
+    {
+      "type": "standard",
+      "title": "Ubicación",
+      "output": {
+        "generic": [
+          {
+            "title": "El sanatorio y edificio principal se encuentran en Av Italia 2420, 11600 Montevideo, Departamento de Montevideo",
+            "source": "https://i.imgur.com/rBs9mlE.png",
+            "response_type": "image"
+          }
+        ]
+      },
+      "conditions": "#ubicacion_centros",
+      "dialog_node": "node_7_1598980036792",
+      "previous_sibling": "node_9_1598979326784"
+    },
+    {
+      "type": "standard",
+      "title": "Precio habitaciones privadas",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "El precio por noche de la habitación privada es de \\$1.300"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_9_1598979326784",
+      "conditions": "#precio_habitacion_privada",
+      "dialog_node": "node_8_1598965032898"
+    },
+    {
+      "type": "standard",
+      "title": "Despedirse",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hasta la próxima!"
+              },
+              {
+                "text": "Hasta luego! Si tienes más preguntas, no dudes en consultarme!"
+              },
+              {
+                "text": "Chau. Que tengas un buen día!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#adios",
+      "dialog_node": "node_8_1598980559477",
+      "previous_sibling": "node_7_1598980036792"
+    },
+    {
+      "type": "folder",
+      "title": "Habitaciones Privadas",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_9_1598979326784",
+      "previous_sibling": "node_1_1598549446751"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Horarios de atención para Dermatología: - Dr. Panizza - Lunes a Jueves - 8 a 14 hrs- Dra. Casanova - Viernes - 10 a 16 hrs- Dr. Paz - Sábados - 8 a 12 hrs"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1598635169899",
+      "conditions": "@especialidad:dermatólogo",
+      "dialog_node": "response_2_1598981234705",
+      "previous_sibling": "response_3_1598981172128"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Horarios de atención para Oftalmología: - Dr. Méndez - Martes, Miércoles y Jueves - 8 a 16 hrs- Dra. Alberti - Lunes - 16 a 19 hrs- Dr. Villaseca - Viernes y Sábados - 8 a 12 hrs"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1598635169899",
+      "conditions": "@especialidad:oftalmólogo",
+      "dialog_node": "response_3_1598981172128",
+      "previous_sibling": "node_6_1598981444597"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "No hay habitaciones privadas disponibles para la fecha $fecha"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1598968289701",
+      "conditions": "@sys-date.before('2020-09-12')",
+      "dialog_node": "response_6_1598975627507"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para el día $fecha, tenemos 4 habitaciones privadas disponibles"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1598968289701",
+      "conditions": "@sys-date.after('2020-09-12')",
+      "dialog_node": "response_6_1598975760298",
+      "previous_sibling": "response_6_1598975627507"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Horarios de atención para Pediatría:- Dr. Fernandez - Lunes, Miércoles y Viernes - 12 a 18- Dra. Martínez - Martes - 8 a 15- Dra. Esmoris - Jueves y Viernes - 17 a 20"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1598635169899",
+      "conditions": "@especialidad:pediatra",
+      "dialog_node": "response_8_1598981286812",
+      "previous_sibling": "response_2_1598981234705"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_1_1598549446751",
+      "variable": "$cedula",
+      "dialog_node": "slot_2_1598549495635"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_3_1598635169899",
+      "variable": "$especialidad",
+      "dialog_node": "slot_3_1598636424300",
+      "previous_sibling": "response_8_1598981286812"
+    },
+    {
+      "type": "slot",
+      "parent": "node_4_1598967795273",
+      "variable": "$fecha",
+      "dialog_node": "slot_5_1598967820771",
+      "previous_sibling": "node_6_1598975468222"
+    }
+  ],
+  "counterexamples": [
+    {
+      "text": "cual es el tratamiento para un paciente con coronavirus?"
+    },
+    {
+      "text": "cuales son los sintomas del covid-19"
+    }
+  ],
+  "system_settings": {
+    "disambiguation": {
+      "prompt": "Querías decir:",
+      "enabled": false,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "Ninguna de las anteriores"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Querías decir:"
+    }
+  },
+  "learning_opt_out": false,
+  "name": "Skill Hospital",
+  "language": "es",
+  "description": "Skill para consultas al hospital"
+}
