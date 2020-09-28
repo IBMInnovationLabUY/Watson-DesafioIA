@@ -1,0 +1,22 @@
+{
+    "text": "i needed a tire rotation. i would highly recommend this business. they are so fast and you get the job done in the same morning.",
+    "features": {
+      "entities": {
+        "model": "92c7efbf-2e46-4b64-8b9a-47633958b7cb"
+      },
+      "keywords": {
+        "emotion": true,
+        "sentiment": true
+      },
+      "emotion": {
+          "sentiment": true
+      },
+      "categories": {
+        "sentiment": true
+      },
+      "relations": {
+        "model": "92c7efbf-2e46-4b64-8b9a-47633958b7cb"
+      },
+      "sentiment": {}
+    }
+  }  
